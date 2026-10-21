@@ -1,31 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Loja de Roupas</title>
-</head>
-
-<body>
-
-    <h1>Loja de Roupas</h1>
-
-    <h2>Cadastrar produto</h2>
-
-    <input id="nome" placeholder="Nome do produto">
-
-    <button onclick="salvar()">
-        Salvar
-    </button>
-
-    <p id="mensagem"></p>
-
-    <h2>Produtos cadastrados</h2>
-
-    <ul id="lista"></ul>
-
-    <script src="script.js"></script>
-
-</body>
-
-</html>
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f8f8f6"><title>Loja — Produtos</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f8f8f6;--ink:#20221f;--muted:#777a73;--line:#e7e8e2;--green:#344c3d}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",sans-serif}header{border-bottom:1px solid var(--line)}.wrap{width:min(1120px,calc(100% - 36px));margin:auto}.nav{height:72px;display:flex;align-items:center;justify-content:space-between}.brand{font:800 20px Manrope,sans-serif;letter-spacing:-.8px}.mark{display:inline-grid;place-items:center;background:var(--green);color:white;border-radius:8px;width:30px;height:30px;margin-right:9px}.note,.muted{color:var(--muted);font-size:13px}.hero{padding:60px 0 34px}.eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green)}h1{font:700 clamp(34px,5vw,52px)/1.1 Manrope,sans-serif;letter-spacing:-1.8px;max-width:620px;margin:14px 0}.intro{max-width:500px;color:var(--muted);line-height:1.7}.section{display:flex;align-items:center;justify-content:space-between;margin:22px 0 18px}.section h2,.admin h2{font:700 21px Manrope,sans-serif;letter-spacing:-.5px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;padding-bottom:68px}.product{background:white;border:1px solid var(--line);border-radius:15px;overflow:hidden;transition:transform .2s}.product:hover{transform:translateY(-3px)}.photo{aspect-ratio:4/4.3;background:#eeefeb}.photo img{width:100%;height:100%;object-fit:cover;display:block}.placeholder{height:100%;display:grid;place-items:center;color:#9a9e96;font-size:28px}.info{padding:18px}.top{display:flex;justify-content:space-between;gap:12px;align-items:start}.product h3{font:700 15px/1.4 Manrope,sans-serif;margin:0 0 8px}.price{font-weight:700;color:var(--green);white-space:nowrap}.desc{font-size:13px;line-height:1.65;color:var(--muted);margin:0}.empty{grid-column:1/-1;padding:54px 20px;text-align:center;background:white;border:1px dashed #d8dbd4;border-radius:14px;color:var(--muted)}.admin{border-top:1px solid var(--line);background:#f0f1ed;padding:44px 0 52px}.admin h2{margin:8px 0}.form{display:grid;grid-template-columns:1fr 1fr;gap:16px;background:white;border:1px solid var(--line);border-radius:14px;padding:22px}.field{display:flex;flex-direction:column;gap:7px}.full,.footer{grid-column:1/-1}label{font-size:12px;font-weight:700}input,textarea{font:14px "DM Sans",sans-serif;padding:12px;border:1px solid #dfe1da;border-radius:8px;width:100%;background:white;color:var(--ink)}textarea{min-height:85px;resize:vertical}input:focus,textarea:focus{outline:2px solid #344c3d30;border-color:#788a7a}.footer{display:flex;align-items:center;gap:14px;flex-wrap:wrap}button{border:0;border-radius:8px;padding:12px 18px;background:var(--green);color:white;font-weight:700;cursor:pointer}button:disabled{opacity:.6}#mensagem{font-size:13px;color:var(--muted)}footer{padding:22px 0;color:var(--muted);font-size:12px}@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.hero{padding-top:42px}}@media(max-width:520px){.wrap{width:calc(100% - 26px)}.note{display:none}.grid{gap:9px}.info{padding:12px}.top{display:block}.product h3{font-size:13px;margin-bottom:5px}.price{font-size:13px}.desc{font-size:12px}.form{grid-template-columns:1fr;padding:15px}.full,.footer{grid-column:auto}}
+</style></head><body><header><div class="wrap nav"><div class="brand"><span class="mark">L</span>loja.</div><span class="note">Peças escolhidas com cuidado</span></div></header><main><section class="wrap hero"><p class="eyebrow">Nossa seleção</p><h1>Essenciais para o seu dia a dia.</h1><p class="intro">Descubra produtos que combinam estilo, simplicidade e qualidade. Encontre seu próximo favorito.</p></section><section class="wrap"><div class="section"><h2>Produtos em destaque</h2><span class="muted" id="contagem">Carregando…</span></div><div class="grid" id="lista" aria-live="polite"><div class="empty">Carregando produtos…</div></div></section><section class="admin"><div class="wrap"><p class="eyebrow">Gerenciamento</p><h2>Adicionar produto</h2><p class="muted">Cadastre as informações para exibir o produto na vitrine.</p><form class="form" id="produto-form"><div class="field"><label for="nome">Nome do produto *</label><input id="nome" required maxlength="120" placeholder="Ex.: Camiseta essencial"></div><div class="field"><label for="preco">Preço (R$)</label><input id="preco" type="number" min="0" step=".01" placeholder="79,90"></div><div class="field full"><label for="imagem_url">Link da imagem</label><input id="imagem_url" type="url" placeholder="https://exemplo.com/imagem.jpg"></div><div class="field full"><label for="descricao">Descrição</label><textarea id="descricao" maxlength="1000" placeholder="Conte um pouco sobre o produto…"></textarea></div><div class="footer"><button id="salvar-btn" type="submit">Adicionar produto</button><span id="mensagem" role="status"></span></div></form></div></section></main><footer><div class="wrap">© <span id="ano"></span> Loja. Todos os direitos reservados.</div></footer><script src="script.js"></script></body></html>
